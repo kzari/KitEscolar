@@ -1,7 +1,9 @@
-﻿using Kzari.MateriaisEscolares.Application.AppServices.Interfaces;
+﻿using FluentValidation;
+using Kzari.MateriaisEscolares.Application.AppServices.Interfaces;
 using Kzari.MateriaisEscolares.Application.Models;
 using Kzari.MaterialEscolar.Domain.Entities;
 using Kzari.MaterialEscolar.Domain.Interfaces.Repositories;
+using Kzari.MaterialEscolar.Domain.Validators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,7 +43,7 @@ namespace Kzari.MateriaisEscolares.Application.AppServices
         {
             var entidade = new Kit(model.Nome);
 
-            //TODO: validar
+            new KitValidator(_repository).ValidateAndThrow(entidade);
 
             return _repository.Inserir(entidade);
         }
@@ -53,10 +55,10 @@ namespace Kzari.MateriaisEscolares.Application.AppServices
             if (entidade == null)
                 throw new ArgumentException("Kit não encontrado.");
 
-            //TODO: Validar
-
             entidade.Nome = model.Nome;
             entidade.DataAlteracao = DateTime.Now;
+
+            new KitValidator(_repository).ValidateAndThrow(entidade);
 
             _repository.Atualizar(entidade);
         }

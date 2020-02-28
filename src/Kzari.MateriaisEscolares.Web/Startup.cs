@@ -4,6 +4,7 @@ using Kzari.MateriaisEscolares.Infra.Data;
 using Kzari.MateriaisEscolares.Infra.Data.DbContexts;
 using Kzari.MateriaisEscolares.Infra.Data.Repositories;
 using Kzari.MateriaisEscolares.Web.Filters;
+using Kzari.MateriaisEscolares.Web.Middlewares;
 using Kzari.MaterialEscolar.Domain.Interfaces.DbContexts;
 using Kzari.MaterialEscolar.Domain.Interfaces.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -27,12 +28,8 @@ namespace Kzari.MateriaisEscolares.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-
-            //services.AddControllers();
-            //services.AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)));
-
-
+            services.AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)));
+            
             MapAppServices(services);
 
             MapRepositories(services);
@@ -58,10 +55,12 @@ namespace Kzari.MateriaisEscolares.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseExceptionHandlerValidator();
+
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseHttpsRedirection();
 
