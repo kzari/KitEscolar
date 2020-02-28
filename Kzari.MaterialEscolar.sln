@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kzari.MaterialEscolar.Domain", "src\Kzari.MaterialEscolar.Domain\Kzari.MaterialEscolar.Domain.csproj", "{43E211E8-A698-4FD9-88E8-B5F24B4F04A3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kzari.MateriaisEscolares.Infra.Data", "src\Kzari.MateriaisEscolares.Infra.Data\Kzari.MateriaisEscolares.Infra.Data.csproj", "{228A146A-C01D-4C71-BF5F-009DD34B55F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kzari.MateriaisEscolares.Web", "src\Kzari.MateriaisEscolares.Web\Kzari.MateriaisEscolares.Web.csproj", "{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kzari.MateriaisEscolares.Application", "src\Kzari.MateriaisEscolares.Application\Kzari.MateriaisEscolares.Application.csproj", "{D5A5EC92-2B8B-4840-99F9-FCFBC0116412}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. UI", "1. UI", "{C44E1DC9-3B16-4B6D-8306-ABF0D827A83F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. App", "2. App", "{69B24771-4AFE-45F4-AEF7-D53A812657EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Domain", "3. Domain", "{953EA549-9015-4E93-B997-0070C86EAD10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Infra", "4. Infra", "{EF407E51-314E-4D4E-9ECB-86ADE95F3B17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43E211E8-A698-4FD9-88E8-B5F24B4F04A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43E211E8-A698-4FD9-88E8-B5F24B4F04A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43E211E8-A698-4FD9-88E8-B5F24B4F04A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43E211E8-A698-4FD9-88E8-B5F24B4F04A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{228A146A-C01D-4C71-BF5F-009DD34B55F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{228A146A-C01D-4C71-BF5F-009DD34B55F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{228A146A-C01D-4C71-BF5F-009DD34B55F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{228A146A-C01D-4C71-BF5F-009DD34B55F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{43E211E8-A698-4FD9-88E8-B5F24B4F04A3} = {953EA549-9015-4E93-B997-0070C86EAD10}
+		{228A146A-C01D-4C71-BF5F-009DD34B55F5} = {EF407E51-314E-4D4E-9ECB-86ADE95F3B17}
+		{2D78A9A7-1DA5-47AC-A2EE-4E5DD9C5184E} = {C44E1DC9-3B16-4B6D-8306-ABF0D827A83F}
+		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412} = {69B24771-4AFE-45F4-AEF7-D53A812657EF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {326EB194-C010-42B8-928A-0456BBD54ECA}
+	EndGlobalSection
+EndGlobal
