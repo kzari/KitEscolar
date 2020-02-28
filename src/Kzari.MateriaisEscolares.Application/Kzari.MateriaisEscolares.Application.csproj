@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kzari.MaterialEscolar.Domain\Kzari.MaterialEscolar.Domain.csproj" />
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AppServices\Base\" />
+    <ProjectReference Include="..\Kzari.MaterialEscolar.Domain\Kzari.MaterialEscolar.Domain.csproj" />
   </ItemGroup>
 
 </Project>

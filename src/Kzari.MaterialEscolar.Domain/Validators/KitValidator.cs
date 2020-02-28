@@ -7,9 +7,9 @@ namespace Kzari.MaterialEscolar.Domain.Validators
 {
     public class KitValidator : AbstractValidator<Kit>
     {
-        private readonly IKitRepository _repository;
+        private readonly IEntityBaseRepository<Kit> _repository;
 
-        public KitValidator(IKitRepository repository)
+        public KitValidator(IEntityBaseRepository<Kit> repository)
         {
             _repository = repository;
 

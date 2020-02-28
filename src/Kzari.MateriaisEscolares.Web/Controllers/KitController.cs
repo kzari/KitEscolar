@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Kzari.MateriaisEscolares.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/kit")]
     [ApiController]
     public class KitController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
             return Ok(kits);
         }
 
-        [HttpGet("{id}", Name ="Get")]
+        [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
             var kit = _service.Obter(id);
@@ -40,7 +40,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
 
             var kit = _service.Obter(id);
 
-            string url = Url.Link("Get", new { id = id });
+            string url = Url.Link("", new { id });
 
             return Created(url, kit);
         }

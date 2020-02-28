@@ -2,8 +2,7 @@
 
 namespace Kzari.MaterialEscolar.Domain.Interfaces.Repositories
 {
-
-    public interface IKitRepository : IEntityBaseRepository<Kit>
+    public interface IProdutoRepository : IEntityBaseRepository<Produto>
     {
     }
 }

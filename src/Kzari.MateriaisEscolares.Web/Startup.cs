@@ -2,7 +2,6 @@ using Kzari.MateriaisEscolares.Application.AppServices;
 using Kzari.MateriaisEscolares.Application.AppServices.Interfaces;
 using Kzari.MateriaisEscolares.Infra.Data;
 using Kzari.MateriaisEscolares.Infra.Data.DbContexts;
-using Kzari.MateriaisEscolares.Infra.Data.Repositories;
 using Kzari.MateriaisEscolares.Web.Filters;
 using Kzari.MateriaisEscolares.Web.Middlewares;
 using Kzari.MaterialEscolar.Domain.Interfaces.DbContexts;
@@ -12,7 +11,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using Kzari.MateriaisEscolares.Application.MappingProfiles;
 
 namespace Kzari.MateriaisEscolares.Web
 {
@@ -39,17 +39,25 @@ namespace Kzari.MateriaisEscolares.Web
 
             // Map & Get new service to IApplicationDbContext with MEContext
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<MEContext>());
+
+
+            services.AddAutoMapper(opt =>
+            {
+                opt.AddProfile(new EntityToModelMappingProfile());
+                opt.AddProfile(new ModelToEntityMappingProfile());
+            }, typeof(Startup));
         }
 
         private static void MapAppServices(IServiceCollection services)
         {
             services.AddTransient<IKitAppService, KitAppService>();
+            services.AddTransient<IProdutoAppService, ProdutoAppService>();
         }
         private static void MapRepositories(IServiceCollection services)
         {
             services.AddTransient(typeof(IEntityBaseRepository<>), typeof(EntityBaseRepository<>));
 
-            services.AddTransient<IKitRepository, KitRepository>();
+            //services.AddTransient<IKitRepository, KitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

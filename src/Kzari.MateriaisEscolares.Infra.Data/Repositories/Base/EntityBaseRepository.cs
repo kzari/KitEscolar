@@ -1,4 +1,5 @@
-﻿using Kzari.MaterialEscolar.Domain;
+﻿using Kzari.MateriaisEscolares.Infra.Data.DbContexts;
+using Kzari.MaterialEscolar.Domain;
 using Kzari.MaterialEscolar.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,10 +11,10 @@ namespace Kzari.MateriaisEscolares.Infra.Data
 {
     public class EntityBaseRepository<TEntity> : IEntityBaseRepository<TEntity> where TEntity : Entidade
     {
-        private readonly DbContext _context;
+        private readonly MEContext _context;
         protected const int InserirEmLote_QtdeRegistrosInseridosPorVez = 20;
 
-        public EntityBaseRepository(DbContext context)
+        public EntityBaseRepository(MEContext context)
         {
             _context = context;
         }

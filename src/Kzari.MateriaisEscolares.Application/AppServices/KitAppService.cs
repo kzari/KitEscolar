@@ -12,10 +12,10 @@ namespace Kzari.MateriaisEscolares.Application.AppServices
 {
     public class KitAppService : IKitAppService
     {
-        private readonly IKitRepository _repository;
+        private readonly IEntityBaseRepository<Kit> _repository;
 
 
-        public KitAppService(IKitRepository repository)
+        public KitAppService(IEntityBaseRepository<Kit> repository)
         {
             _repository = repository;
         }
