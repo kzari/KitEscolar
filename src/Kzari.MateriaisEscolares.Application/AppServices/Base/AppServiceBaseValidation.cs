@@ -19,13 +19,13 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
         where TValidator : IValidator<TEntity>
         where TModel : class
     {
-        private readonly IMapper _mapper;
-        private readonly IEntityBaseRepository<TEntity> _repository;
+        protected readonly IMapper MapperInstance;
+        protected readonly IEntityBaseRepository<TEntity> Repository;
 
         protected AppServiceBaseValidation(IMapper mapper, IEntityBaseRepository<TEntity> repository)
         {
-            _mapper = mapper;
-            _repository = repository;
+            MapperInstance = mapper;
+            Repository = repository;
         }
 
         public TModel ObterPorId(int id)
@@ -33,7 +33,7 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
             if (id == 0)
                 throw new ArgumentException("Id não informado.");
 
-            TEntity entidade = _repository.Obter(id);
+            TEntity entidade = Repository.Obter(id);
 
             if (entidade == null)
                 return null;
@@ -41,13 +41,13 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
             return DeEntidadeParaViewModel(entidade);
         }
 
-        public IEnumerable<TModel> Selecionar(bool somenteAtivos = true)
+        public virtual IEnumerable<TModel> Selecionar(bool somenteAtivos = true)
         {
-            IEnumerable<TEntity> entidades = _repository
+            IEnumerable<TEntity> entidades = Repository
                 .SelecionarAsNoTracking()
                 .Where(a => !somenteAtivos || a.Ativo);
 
-            return _mapper.Map<IEnumerable<TModel>>(entidades);
+            return MapperInstance.Map<IEnumerable<TModel>>(entidades);
         }
 
         public virtual int Criar(TModel model)
@@ -56,7 +56,7 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
 
             Validar(entidade);
 
-            _repository.Inserir(entidade);
+            Repository.Inserir(entidade);
 
             return entidade.Id;
         }
@@ -69,7 +69,7 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
 
             Validar(entidade);
 
-            _repository.Atualizar(entidade);
+            Repository.Atualizar(entidade);
         }
 
         public void Deletar(int id)
@@ -77,20 +77,20 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
             if (id == 0)
                 throw new ArgumentException("Id não informado.");
 
-            TEntity entidade = _repository.Obter(id);
+            TEntity entidade = Repository.Obter(id);
             if (entidade == null)
                 throw new ArgumentException("Não encontrado.");
 
-            _repository.Excluir(entidade);
+            Repository.Excluir(entidade);
         }
 
         protected virtual TEntity DeViewModelParaEntidade(TModel model, int id = 0)
         {
-            var entidade = _mapper.Map<TEntity>(model);
+            var entidade = MapperInstance.Map<TEntity>(model);
             entidade.Id = id;
             return entidade;
         }
-        protected virtual TModel DeEntidadeParaViewModel(TEntity entidade) => _mapper.Map<TModel>(entidade);
+        protected virtual TModel DeEntidadeParaViewModel(TEntity entidade) => MapperInstance.Map<TModel>(entidade);
 
         protected virtual IValidator<TEntity> ObterValidator()
         {
@@ -100,8 +100,8 @@ namespace Kzari.MateriaisEscolares.Application.AppServices.Base
             if(construtorSemParametros != null)
                 return Activator.CreateInstance<TValidator>();
 
-            var construtorComRepositorio = validatorType.GetConstructor(new[] { _repository.GetType() });
-            return (IValidator<TEntity>)construtorComRepositorio.Invoke(new[] { _repository });
+            var construtorComRepositorio = validatorType.GetConstructor(new[] { Repository.GetType() });
+            return (IValidator<TEntity>)construtorComRepositorio.Invoke(new[] { Repository });
         }
         protected virtual void Validar(TEntity entidade)
         {

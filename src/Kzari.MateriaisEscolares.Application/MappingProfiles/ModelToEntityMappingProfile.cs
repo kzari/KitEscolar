@@ -9,6 +9,7 @@ namespace Kzari.MateriaisEscolares.Application.MappingProfiles
         public ModelToEntityMappingProfile()
         {
             CreateMap<KitModel, Kit>();
+            CreateMap<ItemModel, Item>();
 
             CreateMap<ProdutoModel, Produto>();
         }

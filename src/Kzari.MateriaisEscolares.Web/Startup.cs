@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using Kzari.MateriaisEscolares.Application.MappingProfiles;
+using Kzari.MateriaisEscolares.Infra.Data.Repositories;
 
 namespace Kzari.MateriaisEscolares.Web
 {
@@ -28,8 +29,11 @@ namespace Kzari.MateriaisEscolares.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)));
-            
+            services
+                .AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)))
+                .AddNewtonsoftJson();
+
+
             MapAppServices(services);
 
             MapRepositories(services);
@@ -57,7 +61,7 @@ namespace Kzari.MateriaisEscolares.Web
         {
             services.AddTransient(typeof(IEntityBaseRepository<>), typeof(EntityBaseRepository<>));
 
-            //services.AddTransient<IKitRepository, KitRepository>();
+            services.AddTransient<IKitRepository, KitRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

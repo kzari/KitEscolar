@@ -18,7 +18,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var kits = _service.ObterTodos();
+            var kits = _service.SelecionarTodos();
 
             return Ok(kits);
         }
@@ -26,7 +26,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var kit = _service.Obter(id);
+            var kit = _service.ObterPorId(id);
             if (kit == null)
                 return NotFound();
 
@@ -38,7 +38,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
         {
             int id = _service.Criar(model);
 
-            var kit = _service.Obter(id);
+            var kit = _service.ObterPorId(id);
 
             string url = Url.Link("", new { id });
 
@@ -50,7 +50,7 @@ namespace Kzari.MateriaisEscolares.Web.Controllers
         {
             _service.Editar(id, model);
 
-            var kit = _service.Obter(id);
+            var kit = _service.ObterPorId(id);
 
             return Ok(kit);
         }

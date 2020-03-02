@@ -10,6 +10,8 @@ namespace Kzari.MateriaisEscolares.Application.MappingProfiles
         {
             CreateMap<Kit, KitModel>();
             CreateMap<Kit, KitExibirModel>();
+            CreateMap<Item, ItemModel>();
+            CreateMap<Item, ItemExibirModel>();
 
             CreateMap<Produto, ProdutoModel>();
         }

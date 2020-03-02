@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
 
 namespace Kzari.MaterialEscolar.Domain.Interfaces.Repositories
 {
@@ -13,7 +11,7 @@ namespace Kzari.MaterialEscolar.Domain.Interfaces.Repositories
         void Excluir(TEntity obj);
 
         TEntity Obter(int id);
-        IEnumerable<TEntity> SelecionarAsNoTracking(params Expression<Func<TEntity, object>>[] includeExpressions);
+        IEnumerable<TEntity> SelecionarAsNoTracking();
         IEnumerable<TEntity> Selecionar();
     }
 }

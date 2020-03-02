@@ -1,66 +1,26 @@
-﻿using FluentValidation;
+﻿using AutoMapper;
+using Kzari.MateriaisEscolares.Application.AppServices.Base;
 using Kzari.MateriaisEscolares.Application.AppServices.Interfaces;
 using Kzari.MateriaisEscolares.Application.Models;
 using Kzari.MaterialEscolar.Domain.Entities;
 using Kzari.MaterialEscolar.Domain.Interfaces.Repositories;
 using Kzari.MaterialEscolar.Domain.Validators;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Kzari.MateriaisEscolares.Application.AppServices
 {
-    public class KitAppService : IKitAppService
+    public class KitAppService : AppServiceBaseValidation<Kit, KitValidator, KitModel>,  IKitAppService
     {
-        private readonly IEntityBaseRepository<Kit> _repository;
-
-
-        public KitAppService(IEntityBaseRepository<Kit> repository)
+        public KitAppService(IMapper mapper, IKitRepository repository) : base(mapper, repository)
         {
-            _repository = repository;
         }
 
-        public IEnumerable<KitExibirModel> ObterTodos()
+        public IEnumerable<KitExibirModel> SelecionarTodos()
         {
-            IEnumerable<KitExibirModel> kits = _repository
-                .Selecionar()
-                .Select(kit => new KitExibirModel { Id = kit.Id, Nome = kit.Nome })
-                .ToList();
+            IEnumerable<Kit> entidades = Repository.SelecionarAsNoTracking().Where(a => a.Ativo);
 
-            return kits;
-        }
-
-        public KitExibirModel Obter(int id)
-        {
-            var kit = _repository.Obter(id);
-
-            return kit == null ? 
-                null : 
-                new KitExibirModel { Id = kit.Id, Nome = kit.Nome };
-        }
-
-        public int Criar(KitModel model)
-        {
-            var entidade = new Kit(model.Nome);
-
-            new KitValidator(_repository).ValidateAndThrow(entidade);
-
-            return _repository.Inserir(entidade);
-        }
-
-        public void Editar(int id, KitModel model)
-        {
-            var entidade = _repository.Obter(id);
-
-            if (entidade == null)
-                throw new ArgumentException("Kit não encontrado.");
-
-            entidade.Nome = model.Nome;
-            entidade.DataAlteracao = DateTime.Now;
-
-            new KitValidator(_repository).ValidateAndThrow(entidade);
-
-            _repository.Atualizar(entidade);
+            return MapperInstance.Map<IEnumerable<KitExibirModel>>(entidades);
         }
     }
 }

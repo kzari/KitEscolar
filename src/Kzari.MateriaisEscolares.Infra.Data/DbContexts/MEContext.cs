@@ -37,7 +37,7 @@ namespace Kzari.MateriaisEscolares.Infra.Data.DbContexts
                     .HasKey(p => new { p.IdKit, p.IdProduto });
                 buildAction
                     .HasOne<Kit>(p => p.Kit)
-                    .WithMany(p => p.Items)
+                    .WithMany(p => p.Itens)
                     .HasForeignKey(p => p.IdKit);
                 buildAction
                     .HasOne<Produto>(p => p.Produto)

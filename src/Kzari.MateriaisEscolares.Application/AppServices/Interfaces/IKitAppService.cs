@@ -1,13 +1,12 @@
-﻿using Kzari.MateriaisEscolares.Application.Models;
+﻿using Kzari.MateriaisEscolares.Application.AppServices.Base;
+using Kzari.MateriaisEscolares.Application.Models;
+using Kzari.MaterialEscolar.Domain.Entities;
 using System.Collections.Generic;
 
 namespace Kzari.MateriaisEscolares.Application.AppServices.Interfaces
 {
-    public interface IKitAppService
+    public interface IKitAppService : IAppServiceBase<Kit, KitModel>
     {
-        int Criar(KitModel model);
-        IEnumerable<KitExibirModel> ObterTodos();
-        KitExibirModel Obter(int id);
-        void Editar(int id, KitModel model);
+        IEnumerable<KitExibirModel> SelecionarTodos();
     }
 }

@@ -2,28 +2,26 @@
 using Kzari.MaterialEscolar.Domain;
 using Kzari.MaterialEscolar.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 
 namespace Kzari.MateriaisEscolares.Infra.Data
 {
     public class EntityBaseRepository<TEntity> : IEntityBaseRepository<TEntity> where TEntity : Entidade
     {
-        private readonly MEContext _context;
+        protected readonly MEContext DbContext;
         protected const int InserirEmLote_QtdeRegistrosInseridosPorVez = 20;
 
         public EntityBaseRepository(MEContext context)
         {
-            _context = context;
+            DbContext = context;
         }
 
 
-        public int Inserir(TEntity obj)
+        public virtual int Inserir(TEntity obj)
         {
-            _context.Set<TEntity>().Add(obj);
-            _context.SaveChanges();
+            DbContext.Set<TEntity>().Add(obj);
+            DbContext.SaveChanges();
 
             return obj.Id;
         }
@@ -32,49 +30,46 @@ namespace Kzari.MateriaisEscolares.Infra.Data
         /// Insersão em Lote
         /// </summary>
         /// <param name="entidades"></param>
-        public void InserirEmLote(IList<TEntity> entidades)
+        public virtual void InserirEmLote(IList<TEntity> entidades)
         {
             while (entidades.Any())
             {
                 var entidadesSalvar = entidades.Take(InserirEmLote_QtdeRegistrosInseridosPorVez).ToList();
-                _context.Set<TEntity>().AddRange(entidadesSalvar);
-                _context.SaveChanges();
+                DbContext.Set<TEntity>().AddRange(entidadesSalvar);
+                DbContext.SaveChanges();
 
                 entidades = entidades.Except(entidadesSalvar).ToList();
             }
         }
 
-        public void Atualizar(TEntity obj)
+        public virtual void Atualizar(TEntity obj)
         {
-            _context.Entry(obj).State = EntityState.Modified;
-            _context.Entry(obj).Property(c => c.DataCriacao).IsModified = false;
-            _context.SaveChanges();
+            DbContext.Entry(obj).State = EntityState.Modified;
+            DbContext.Entry(obj).Property(c => c.DataCriacao).IsModified = false;
+            DbContext.SaveChanges();
         }
 
-        public void Excluir(TEntity obj)
+        public virtual void Excluir(TEntity obj)
         {
-            _context.Set<TEntity>().Remove(obj);
-            _context.SaveChanges();
+            DbContext.Set<TEntity>().Remove(obj);
+            DbContext.SaveChanges();
         }
 
-        public IEnumerable<TEntity> SelecionarAsNoTracking(params Expression<Func<TEntity, object>>[] includeExpressions)
+        public virtual IEnumerable<TEntity> SelecionarAsNoTracking()
         {
-            IQueryable<TEntity> set = _context.Set<TEntity>().AsNoTracking();
-
-            foreach (var includeExpression in includeExpressions)
-                set = set.Include(includeExpression);
+            IQueryable<TEntity> set = DbContext.Set<TEntity>().AsNoTracking();
 
             return set;
         }
 
-        public IEnumerable<TEntity> Selecionar()
+        public virtual IEnumerable<TEntity> Selecionar()
         {
-            return _context.Set<TEntity>();
+            return DbContext.Set<TEntity>();
         }
 
-        public TEntity Obter(int id)
+        public virtual TEntity Obter(int id)
         {
-            return _context.Set<TEntity>().Find(id);
+            return DbContext.Set<TEntity>().Find(id);
         }
     }
 }
