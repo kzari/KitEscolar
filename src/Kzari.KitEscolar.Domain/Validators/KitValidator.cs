@@ -20,10 +20,14 @@ namespace Kzari.KitEscolar.Domain.Validators
 
                 .Must((kit, nome) => KitUnico(kit))
                 .WithMessage("Já existe um Kit com este nome cadastrado.");
+
+            RuleFor(kit => kit.Itens)
+                .Must((kit, itens) => !itens.Any() || itens.All(i => i.Quantidade > 0))
+                .WithMessage("Necessário informar a quantidade de produtos de um ou mais itens.");
         }
 
         private bool KitUnico(Kit kit) => !_repository
-            .Selecionar()
+            .SelecionarAsNoTracking()
             .Any(k => k.Nome.ToLower() == kit.Nome.ToLower() && 
                       (kit.Id == 0 || kit.Id != k.Id));
     }

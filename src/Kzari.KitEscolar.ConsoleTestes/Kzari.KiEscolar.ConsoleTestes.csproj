@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Kzari.KitEscolar.Application\Kzari.KitEscolar.Application.csproj" />
     <ProjectReference Include="..\Kzari.KitEscolar.Infra.Data\Kzari.KitEscolar.Infra.Data.csproj" />
   </ItemGroup>
 

@@ -22,7 +22,7 @@ namespace Kzari.KitEscolar.Domain.Validators
         }
 
         public bool ProdutoUnico(Produto produto) => !_repository
-            .Selecionar()
+            .SelecionarAsNoTracking()
             .Any(p => p.Nome.ToLower() == produto.Nome.ToLower() && 
                       (p.Id == 0 || p.Id != produto.Id));
     }

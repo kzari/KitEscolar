@@ -2,6 +2,7 @@
 using Kzari.KitEscolar.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using Kzari.KitEscolar.Application.AppServices;
 
 namespace Kzari.KitEscolar.ConsoleTestes
 {
@@ -11,6 +12,10 @@ namespace Kzari.KitEscolar.ConsoleTestes
         {
             Console.WriteLine("Hello World!");
 
+            Teste1();
+        }
+        private static void Teste1()
+        {
             var opt = new DbContextOptionsBuilder<MEContext>();
             opt.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=MaterialEscolarDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
 
