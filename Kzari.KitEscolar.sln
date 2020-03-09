@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kzari.KiEscolar.ConsoleTest
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kzari.KitEscolar.Domain", "src\Kzari.KitEscolar.Domain\Kzari.KitEscolar.Domain.csproj", "{2DA89ABA-01C7-4026-B927-2D8F6C03B3CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kzari.KitEscolar.Domain.Test", "src\Kzari.KitEscolar.Domain.Test\Kzari.KitEscolar.Domain.Test.csproj", "{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{2DA89ABA-01C7-4026-B927-2D8F6C03B3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DA89ABA-01C7-4026-B927-2D8F6C03B3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DA89ABA-01C7-4026-B927-2D8F6C03B3CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{D5A5EC92-2B8B-4840-99F9-FCFBC0116412} = {69B24771-4AFE-45F4-AEF7-D53A812657EF}
 		{B0E6C170-E8C6-43EA-82DB-5FB4C045E85E} = {C44E1DC9-3B16-4B6D-8306-ABF0D827A83F}
 		{2DA89ABA-01C7-4026-B927-2D8F6C03B3CC} = {953EA549-9015-4E93-B997-0070C86EAD10}
+		{3EC0AAD2-6410-4A38-BAA8-A6D5DBEC106A} = {953EA549-9015-4E93-B997-0070C86EAD10}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {326EB194-C010-42B8-928A-0456BBD54ECA}

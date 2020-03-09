@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Kzari.KitEscolar.Infra.Data.Repositories
 {
-    public class KitRepository : EntityBaseRepository<Kit>, IKitRepository
+    public class KitRepository : EntityBaseRepository<Kit>, IEntityBaseRepository<Kit>
     {
         public KitRepository(MEContext context) : base(context)
         {

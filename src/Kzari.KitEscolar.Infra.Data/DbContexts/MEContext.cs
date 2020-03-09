@@ -5,6 +5,12 @@ namespace Kzari.KitEscolar.Infra.Data.DbContexts
 {
     public class MEContext : DbContext
     {
+        //Mock
+        public MEContext()
+        {
+
+        }
+
         public MEContext(DbContextOptions options) : base(options)
         {
 

@@ -83,7 +83,7 @@ namespace Kzari.KitEscolar.Web
         {
             services.AddTransient(typeof(IEntityBaseRepository<>), typeof(EntityBaseRepository<>));
 
-            services.AddScoped<IKitRepository, KitRepository>();
+            //services.AddScoped<IKitRepository, KitRepository>();
         }
 
 

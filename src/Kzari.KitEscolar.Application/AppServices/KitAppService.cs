@@ -11,7 +11,7 @@ namespace Kzari.KitEscolar.Application.AppServices
 {
     public class KitAppService : AppServiceBase<Kit, KitModel, KitValidator>, IKitAppService
     {
-        public KitAppService(IMapper mapper, IKitRepository repository, IValidator<Kit> validator)
+        public KitAppService(IMapper mapper, IEntityBaseRepository<Kit> repository, IValidator<Kit> validator)
             : base(mapper, repository, validator)
         {
         }

@@ -17,6 +17,13 @@ namespace Kzari.KitEscolar.Domain.Validators
                 .NotEmpty()
                 .NotNull()
                 .WithMessage("O Produto deve ter um nome.")
+
+                .MinimumLength(3)
+                .WithMessage("O Nome do Kit deve ter ao menos 3 caracteres.")
+
+                .MaximumLength(50)
+                .WithMessage("O Nome do Kit deve ter até 50 caracteres.")
+
                 .Must((produto, nome) => ProdutoUnico(produto))
                 .WithMessage($"Já existe um Produto com este nome cadastrado.");
         }
