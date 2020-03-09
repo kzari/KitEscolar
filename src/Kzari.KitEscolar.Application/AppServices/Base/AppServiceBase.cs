@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Kzari.KitEscolar.Domain;
-using Kzari.KitEscolar.Domain.Interfaces.Repositories;
+using Kzari.KitEscolar.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

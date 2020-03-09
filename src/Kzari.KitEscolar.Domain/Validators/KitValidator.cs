@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Kzari.KitEscolar.Domain.Entities;
-using Kzari.KitEscolar.Domain.Interfaces.Repositories;
+using Kzari.KitEscolar.Domain.Repositories;
 using System.Linq;
 
 namespace Kzari.KitEscolar.Domain.Validators

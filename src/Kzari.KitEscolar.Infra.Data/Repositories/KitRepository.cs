@@ -1,13 +1,13 @@
 ﻿using Kzari.KitEscolar.Infra.Data.DbContexts;
 using Kzari.KitEscolar.Domain.Entities;
-using Kzari.KitEscolar.Domain.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using Kzari.KitEscolar.Domain.Repositories;
 
 namespace Kzari.KitEscolar.Infra.Data.Repositories
 {
-    public class KitRepository : EntityBaseRepository<Kit>, IEntityBaseRepository<Kit>
+    public class KitRepository : EntityBaseRepository<Kit>, IKitRepository
     {
         public KitRepository(MEContext context) : base(context)
         {

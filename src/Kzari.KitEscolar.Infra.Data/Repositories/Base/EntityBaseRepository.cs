@@ -1,6 +1,6 @@
 ﻿using Kzari.KitEscolar.Infra.Data.DbContexts;
 using Kzari.KitEscolar.Domain;
-using Kzari.KitEscolar.Domain.Interfaces.Repositories;
+using Kzari.KitEscolar.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

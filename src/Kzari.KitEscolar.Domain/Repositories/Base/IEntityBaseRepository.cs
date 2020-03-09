@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Kzari.KitEscolar.Domain.Interfaces.Repositories
+namespace Kzari.KitEscolar.Domain.Repositories
 {
     public interface IEntityBaseRepository<TEntity> where TEntity : Entidade
     {

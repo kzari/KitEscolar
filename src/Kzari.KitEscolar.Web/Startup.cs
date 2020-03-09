@@ -4,7 +4,7 @@ using Kzari.KitEscolar.Infra.Data;
 using Kzari.KitEscolar.Infra.Data.DbContexts;
 using Kzari.KitEscolar.Web.Filters;
 using Kzari.KitEscolar.Web.Middlewares;
-using Kzari.KitEscolar.Domain.Interfaces.Repositories;
+using Kzari.KitEscolar.Domain.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -83,7 +83,7 @@ namespace Kzari.KitEscolar.Web
         {
             services.AddTransient(typeof(IEntityBaseRepository<>), typeof(EntityBaseRepository<>));
 
-            //services.AddScoped<IKitRepository, KitRepository>();
+            services.AddScoped<IKitRepository, KitRepository>();
         }
 
 
