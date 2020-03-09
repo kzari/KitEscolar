@@ -42,7 +42,9 @@ namespace Kzari.KitEscolar.Web
             });
 
             services
-                .AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)))
+                .AddMvc(opt => {
+                    opt.Filters.Add(typeof(ValidatorActionFilter));
+                    opt.EnableEndpointRouting = false; })
                 .AddNewtonsoftJson();
 
             MapAppServices(services);
@@ -86,7 +88,7 @@ namespace Kzari.KitEscolar.Web
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             var ci = new CultureInfo("pt-BR");
             app.UseRequestLocalization(new RequestLocalizationOptions
@@ -98,20 +100,36 @@ namespace Kzari.KitEscolar.Web
 
             app.UseExceptionHandlerValidator();
 
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+
+            if (env.IsDevelopment())
+            {
+                app.UseExceptionHandlerValidator();
+                //app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandlerValidator();
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+            //app.UseRouting();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllers();
+            //});
+
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllers();
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
