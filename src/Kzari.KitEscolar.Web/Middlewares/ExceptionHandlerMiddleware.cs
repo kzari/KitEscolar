@@ -52,7 +52,12 @@ namespace Kzari.KitEscolar.Web.Middlewares
                 // writes / returns error model to the response
 
                 IEnumerable<string> errosValidacao = ex.Errors.Select(a => a.ErrorMessage);
-                await context.Response.WriteAsync(JsonConvert.SerializeObject(errosValidacao));
+
+                object obj = new { 
+                    mensagem = "Não foi possível concluir a solicitação, um ou mais critérios de validação não foram atendidos." ,
+                    errosDeValidacao = errosValidacao
+                };
+                await context.Response.WriteAsync(JsonConvert.SerializeObject(obj));
 
                 context.Response.Headers.Clear();
             }
@@ -78,7 +83,7 @@ namespace Kzari.KitEscolar.Web.Middlewares
                 context.Response.ContentType = JsonContentType;
 
                 await context.Response.WriteAsync(
-                    JsonConvert.SerializeObject(new 
+                    JsonConvert.SerializeObject(new
                     {
                         Mensagem = $"Ops.. Ocorreu um erro inesperado."
                     }));

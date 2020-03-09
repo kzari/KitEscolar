@@ -12,7 +12,7 @@ namespace Kzari.KitEscolar.ConsoleTestes
         {
             Console.WriteLine("Hello World!");
 
-            Teste1();
+            //Teste1();
         }
         private static void Teste1()
         {

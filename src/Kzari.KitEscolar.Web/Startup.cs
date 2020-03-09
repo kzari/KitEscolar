@@ -13,6 +13,14 @@ using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
 using Kzari.KitEscolar.Application.MappingProfiles;
 using Kzari.KitEscolar.Infra.Data.Repositories;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
+using System.Globalization;
+using FluentValidation;
+using Kzari.KitEscolar.Domain.Entities;
+using Kzari.KitEscolar.Domain.Validators;
+using Kzari.KitEscolar.Application.AppServices.Base;
+using Kzari.KitEscolar.Domain;
 
 namespace Kzari.KitEscolar.Web
 {
@@ -28,16 +36,20 @@ namespace Kzari.KitEscolar.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new RequestCulture("pt-BR");
+            });
+
             services
                 .AddMvc(opt => opt.Filters.Add(typeof(ValidatorActionFilter)))
                 .AddNewtonsoftJson();
 
-
             MapAppServices(services);
-
             MapRepositories(services);
+            MapValidators(services);
 
-            services.AddDbContext<MEContext>(options => 
+            services.AddDbContext<MEContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString(nameof(MEContext))));
 
             // Map & Get new service to IApplicationDbContext with MEContext
@@ -51,10 +63,19 @@ namespace Kzari.KitEscolar.Web
             }, typeof(Startup));
         }
 
+        private static void MapValidators(IServiceCollection services)
+        {
+            services.AddTransient<IValidator<Kit>, KitValidator>();
+            services.AddTransient<IValidator<Produto>, ProdutoValidator>();
+        }
+
         private static void MapAppServices(IServiceCollection services)
         {
+            services.AddTransient(typeof(IAppServiceBase<>), typeof(AppServiceBase<>));
+            services.AddTransient(typeof(IAppServiceBase<,>), typeof(AppServiceBase<,>));
+            services.AddTransient(typeof(IAppServiceBase<,,>), typeof(AppServiceBase<,,>));
+
             services.AddTransient<IKitAppService, KitAppService>();
-            services.AddTransient<IProdutoAppService, ProdutoAppService>();
         }
         private static void MapRepositories(IServiceCollection services)
         {
@@ -63,9 +84,18 @@ namespace Kzari.KitEscolar.Web
             services.AddScoped<IKitRepository, KitRepository>();
         }
 
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var ci = new CultureInfo("pt-BR");
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(ci),
+                SupportedCultures = new[] { ci },
+                SupportedUICultures = new[] { ci }
+            });
+
             app.UseExceptionHandlerValidator();
 
             //if (env.IsDevelopment())

@@ -1,5 +1,7 @@
-﻿using Kzari.KitEscolar.Application.AppServices.Interfaces;
+﻿using Kzari.KitEscolar.Application.AppServices.Base;
 using Kzari.KitEscolar.Application.Models;
+using Kzari.KitEscolar.Domain.Entities;
+using Kzari.KitEscolar.Domain.Validators;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kzari.KitEscolar.Web.Controllers
@@ -8,18 +10,18 @@ namespace Kzari.KitEscolar.Web.Controllers
     [ApiController]
     public class ProdutoController : ControllerBase
     {
-        private readonly IProdutoAppService _appService;
+        private readonly IAppServiceBase<Produto, ProdutoModel, ProdutoValidator> _service;
         
-        public ProdutoController(IProdutoAppService appService)
+        public ProdutoController(IAppServiceBase<Produto, ProdutoModel, ProdutoValidator> appService)
         {
-            _appService = appService;
+            _service = appService;
         }
 
 
         [HttpGet]
         public IActionResult Get()
         {
-            var produtos = _appService.Selecionar();
+            var produtos = _service.Selecionar(somenteAtivos: true);
 
             return Ok(produtos);
         }
@@ -27,7 +29,7 @@ namespace Kzari.KitEscolar.Web.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var produto = _appService.ObterPorId(id);
+            var produto = _service.ObterPorId(id);
             if (produto == null)
                 return NotFound();
 
@@ -37,9 +39,9 @@ namespace Kzari.KitEscolar.Web.Controllers
         [HttpPost]
         public IActionResult Post(ProdutoModel model)
         {
-            int id = _appService.Criar(model);
+            int id = _service.Criar(model);
 
-            var produto = _appService.ObterPorId(id);
+            var produto = _service.ObterPorId(id);
 
             string url = Url.Link("", new { id });
 
@@ -49,9 +51,9 @@ namespace Kzari.KitEscolar.Web.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, ProdutoModel model)
         {
-            _appService.Editar(id, model);
+            _service.Editar(id, model);
 
-            var produto = _appService.ObterPorId(id);
+            var produto = _service.ObterPorId(id);
 
             return Ok(produto);
         }

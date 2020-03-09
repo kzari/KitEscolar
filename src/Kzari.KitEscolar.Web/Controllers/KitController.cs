@@ -18,7 +18,9 @@ namespace Kzari.KitEscolar.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var kits = _service.SelecionarTodos();
+            throw new System.Exception("Alguma coisa");
+
+            var kits = _service.Selecionar<KitExibirModel>(somenteAtivos: true);
 
             return Ok(kits);
         }
@@ -48,6 +50,7 @@ namespace Kzari.KitEscolar.Web.Controllers
         [HttpPut("{id}")]
         public IActionResult Put(int id, KitModel model)
         {
+
             _service.Editar(id, model);
 
             var kit = _service.ObterPorId(id);
